@@ -1,0 +1,13 @@
+.idea
+build/
+frontend/dist/
+frontend/node_modules/
+frontend/*.tsbuildinfo
+frontend/src/styles/global.css.backup
+*.exe
+*.tar.gz
+*.log
+.env
+.env.*
+frontend/.vite/
+.superpowers/

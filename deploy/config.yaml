@@ -1,0 +1,27 @@
+server:
+  host: "0.0.0.0"
+  port: 7070
+
+app:
+  root: "."
+
+fileManager:
+  defaultPath: "/"
+  allowRoot: true
+  maxPreviewSize: 1048576
+  maxUploadSize: 1073741824
+
+storage:
+  dataDir: "./data"
+  logDir: "./logs"
+  cacheDir: "./data/cache"
+  webDir: "./web/dist"
+  shortcutsFile: "./data/shortcuts.json"
+
+security:
+  enableLogin: false
+  allowDangerousOperations: true
+
+ui:
+  theme: "dark"
+  desktopMode: true
