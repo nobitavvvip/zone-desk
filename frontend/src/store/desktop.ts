@@ -42,8 +42,13 @@ export const useDesktopStore = defineStore('desktop', () => {
     }
   }
 
-  function closeWindow() {
+  function closeWindow(name: string) {
     activeWindow.value = null
+    const idx = windowList.value.indexOf(name)
+    if (idx !== -1) {
+      windowList.value.splice(idx, 1)
+    }
+    delete windows[name]
   }
 
   function minimizeWindow(name: string) {

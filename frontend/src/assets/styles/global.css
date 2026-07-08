@@ -18,75 +18,70 @@ html, body, #app {
 
 [data-theme="light"] {
   /* 背景色 */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F3F3F3;
-  --bg-tertiary: #e8e8e8;
-  --bg-sidebar: #FFFFFF;
-  --bg-hover: #E5F3FF;
-  --bg-selected: #CCE8FF;
-  --bg-input: #FFFFFF;
+  --bg-primary: #ffffff;
+  --bg-secondary: #edf2fc;
+  --bg-tertiary: #e2eaf8;
+  --bg-sidebar: #edf2fc;
+  --bg-hover: rgba(37, 99, 235, 0.06);
+  --bg-selected: rgba(37, 99, 235, 0.12);
+  --bg-input: #ffffff;
 
   /* 边框色 */
-  --border-color: #E5E5E5;
-  --border-input: #CCCCCC;
-  --border-focus: #0078D4;
+  --border-color: #cdd9ed;
+  --border-input: #b0c0dc;
+  --border-focus: #2563eb;
 
   /* 文字色 */
-  --text-primary: #1A1A1A;
-  --text-secondary: #666666;
-  --text-muted: #999999;
+  --text-primary: #1e1f30;
+  --text-secondary: #4a5568;
+  --text-muted: #8892a8;
 
   /* 强调色 */
-  --accent: #0078D4;
-  --accent-hover: #106EBE;
-  --error: #D13438;
-  --success: #107C10;
-  --warning: #D83B01;
+  --accent: #2563eb;
+  --accent-hover: #3b82f6;
+  --error: #ef4444;
+  --success: #16a34a;
+  --warning: #ea580c;
 
   /* 阴影 */
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
-  /* 兼容旧变量名 */
-  --hover-bg: rgba(0, 120, 212, 0.08);
-  --hover-bg-subtle: rgba(0, 120, 212, 0.04);
-  --taskbar-bg: rgba(243, 243, 243, 0.95);
-  --desktop-bg: linear-gradient(135deg, #ffffff 0%, #f3f3f3 50%, #e8e8e8 100%);
+  --hover-bg: rgba(37, 99, 235, 0.06);
+  --hover-bg-subtle: rgba(37, 99, 235, 0.03);
 }
 
 [data-theme="dark"] {
   /* 背景色 */
-  --bg-primary: #2a2520;
-  --bg-secondary: #353028;
-  --bg-tertiary: #403830;
-  --bg-sidebar: #2a2520;
-  --bg-hover: rgba(0, 120, 212, 0.2);
-  --bg-selected: rgba(0, 120, 212, 0.35);
+  --bg-primary: #1a1b2e;
+  --bg-secondary: #242642;
+  --bg-tertiary: #30334a;
+  --bg-sidebar: #1e1f30;
+  --bg-hover: rgba(96, 165, 250, 0.15);
+  --bg-selected: rgba(96, 165, 250, 0.25);
   --bg-input: rgba(255, 255, 255, 0.08);
 
   /* 边框色 */
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-input: rgba(255, 255, 255, 0.15);
-  --border-focus: #60CDFF;
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-input: rgba(255, 255, 255, 0.18);
+  --border-focus: #60a5fa;
 
   /* 文字色 */
-  --text-primary: #f0ebe5;
-  --text-secondary: #d4c8b8;
-  --text-muted: #a89888;
+  --text-primary: #e8edf5;
+  --text-secondary: #c8d0e0;
+  --text-muted: #8b9bbf;
 
   /* 强调色 */
-  --accent: #60CDFF;
-  --accent-hover: #98DAFF;
-  --error: #e46a6a;
-  --success: #7aab8b;
-  --warning: #e4b46a;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --error: #ef4444;
+  --success: #14b8a6;
+  --warning: #f97316;
 
   /* 阴影 */
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 
-  /* 兼容旧变量名 */
-  --hover-bg: rgba(139, 115, 85, 0.15);
-  --hover-bg-subtle: rgba(139, 115, 85, 0.08);
-  --taskbar-bg: rgba(42, 37, 32, 0.95);
+  --hover-bg: rgba(96, 165, 250, 0.15);
+  --hover-bg-subtle: rgba(96, 165, 250, 0.08);
 }
 
 

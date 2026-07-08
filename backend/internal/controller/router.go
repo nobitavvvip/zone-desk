@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouter(cfg *config.Config, shortcutSvc *service.ShortcutService) *gin.Engine {
+func NewRouter(cfg *config.Config, shortcutSvc *service.ShortcutService, settingsSvc *service.SettingsService) *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/api/health", HealthHandler)
@@ -32,6 +32,12 @@ func NewRouter(cfg *config.Config, shortcutSvc *service.ShortcutService) *gin.En
 		shortcuts.GET("", ShortcutListHandler(shortcutSvc))
 		shortcuts.POST("", ShortcutCreateHandler(shortcutSvc))
 		shortcuts.DELETE("/:id", ShortcutDeleteHandler(shortcutSvc))
+	}
+
+	settings := r.Group("/api/settings")
+	{
+		settings.GET("", SettingsGetHandler(settingsSvc))
+		settings.PUT("", SettingsSaveHandler(settingsSvc))
 	}
 
 	r.Static("/assets", cfg.Storage.WebDir+"/assets")

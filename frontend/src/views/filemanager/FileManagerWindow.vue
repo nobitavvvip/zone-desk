@@ -5,7 +5,7 @@
       <div class="window-controls">
         <button class="control-btn minimize" @click.stop="desktopStore.minimizeWindow(windowName)">─</button>
         <button class="control-btn maximize" @click.stop="desktopStore.toggleMaximize(windowName)">□</button>
-        <button class="control-btn close" @click="desktopStore.closeWindow">✕</button>
+        <button class="control-btn close" @click="desktopStore.closeWindow(windowName)">✕</button>
       </div>
     </div>
     <div class="window-body">

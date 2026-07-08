@@ -4,6 +4,7 @@ frontend/dist/
 frontend/node_modules/
 frontend/*.tsbuildinfo
 frontend/src/styles/global.css.backup
+backend/data
 *.exe
 *.tar.gz
 *.log

@@ -1,8 +1,6 @@
 <template>
   <div class="taskbar">
-    <div class="taskbar-left">
-      <span class="taskbar-item" @click="showAbout = !showAbout">ZoneDesk</span>
-    </div>
+    <div class="taskbar-left"></div>
     <div class="taskbar-center">
       <span
         v-for="win in desktopStore.windowList"
@@ -18,6 +16,7 @@
       </span>
     </div>
     <div class="taskbar-right">
+      <button class="gear" @click="$emit('toggleSettings')" title="个性化设置">⚙</button>
       <button class="theme-btn" @click="themeStore.toggle" :title="themeStore.isDark ? '切换亮色模式' : '切换暗色模式'">
         <svg v-if="themeStore.isDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
@@ -26,7 +25,7 @@
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
         </svg>
       </button>
-      <span class="taskbar-item">{{ time }}</span>
+      <span class="taskbar-item time">{{ time }}</span>
     </div>
   </div>
 </template>
@@ -36,9 +35,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useDesktopStore } from '@/store/desktop'
 import { useThemeStore } from '@/store/theme'
 
+defineEmits<{
+  toggleSettings: []
+}>()
+
 const desktopStore = useDesktopStore()
 const themeStore = useThemeStore()
-const showAbout = ref(false)
 const time = ref('')
 let timer: ReturnType<typeof setInterval> | null = null
 
@@ -68,20 +70,22 @@ onUnmounted(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 48px;
-  background: var(--taskbar-bg);
-  backdrop-filter: blur(12px);
+  height: 44px;
+  background: rgba(20, 22, 34, 0.82);
+  backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 8px;
-  border-top: 1px solid var(--border-color);
+  padding: 0 16px;
+  font-size: 12px;
+  color: #e8e8ec;
+  z-index: 20;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .taskbar-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .taskbar-center {
@@ -94,61 +98,27 @@ onUnmounted(() => {
 .taskbar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .taskbar-item {
-  padding: 6px 14px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.taskbar-item:hover {
-  background: var(--hover-bg);
-  color: var(--text-primary);
-}
-
-.theme-btn {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.theme-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.theme-btn:hover {
-  background: var(--hover-bg);
-  color: var(--text-primary);
+  font-size: 12px;
+  color: #c8d0e0;
 }
 
 .taskbar-window {
-  padding: 6px 16px;
-  font-size: 13px;
-  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: 6px;
+  background: rgba(96, 165, 250, 0.12);
+  color: #e8e8ec;
+  font-size: 12px;
   cursor: pointer;
-  border-radius: 4px;
-  background: var(--hover-bg-subtle);
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .taskbar-window.active {
-  background: var(--hover-bg);
-  color: var(--text-primary);
-  font-weight: 500;
+  background: var(--accent);
+  color: #fff;
 }
 
 .taskbar-window.minimized {
@@ -157,6 +127,56 @@ onUnmounted(() => {
 }
 
 .taskbar-window:hover {
-  background: var(--hover-bg);
+  opacity: 0.9;
+}
+
+.gear {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: rgba(96, 165, 250, 0.18);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.gear:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  color: #c8d0e0;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.theme-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-btn:hover {
+  background: rgba(96, 165, 250, 0.15);
+}
+
+.time {
+  font-size: 12px;
+  color: #c8d0e0;
+  min-width: 48px;
+  text-align: right;
 }
 </style>

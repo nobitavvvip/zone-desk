@@ -17,6 +17,7 @@ storage:
   cacheDir: "./data/cache"
   webDir: "./web/dist"
   shortcutsFile: "./data/shortcuts.json"
+  settingsFile: "./data/settings.json"
 
 security:
   enableLogin: false

@@ -12,7 +12,8 @@ import (
 func New(cfg *config.Config) *gin.Engine {
 	store := repository.NewJSONStore()
 	shortcutSvc := service.NewShortcutService(store, cfg.Storage.ShortcutsFile)
+	settingsSvc := service.NewSettingsService(store, cfg.Storage.SettingsFile)
 
-	r := controller.NewRouter(cfg, shortcutSvc)
+	r := controller.NewRouter(cfg, shortcutSvc, settingsSvc)
 	return r
 }
