@@ -155,6 +155,26 @@ function startResize(event: MouseEvent) {
   padding: 8px 0;
 }
 
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  opacity: 0.4;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  opacity: 0.7;
+}
+
 .sidebar-item {
   display: flex;
   align-items: center;

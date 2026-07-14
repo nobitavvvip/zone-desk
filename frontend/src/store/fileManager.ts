@@ -13,7 +13,7 @@ export const useFileManagerStore = defineStore('fileManager', () => {
   const error = ref<string | null>(null)
   const history = ref<string[]>(['/'])
   const historyIndex = ref(0)
-  const viewMode = ref<ViewMode>('details')
+  const viewMode = ref<ViewMode>('tile')
   const selectedItems = ref<Set<string>>(new Set())
   const clipboard = ref<{ files: FileItem[], action: 'copy' | 'cut' } | null>(null)
   const sortBy = ref<SortBy>('name')

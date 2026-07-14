@@ -549,6 +549,31 @@ onUnmounted(() => {
   position: relative;
 }
 
+.file-list::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.file-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.file-list::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  opacity: 0.4;
+}
+
+.file-list::-webkit-scrollbar-thumb:hover {
+  opacity: 0.7;
+}
+
+.file-list::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* 详细信息视图 */
 .details-view {
   display: flex;
@@ -594,6 +619,26 @@ onUnmounted(() => {
 .details-body {
   flex: 1;
   overflow-y: auto;
+}
+
+.details-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.details-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.details-body::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  opacity: 0.4;
+}
+
+.details-body::-webkit-scrollbar-thumb:hover {
+  opacity: 0.7;
 }
 
 .details-row {

@@ -233,8 +233,11 @@ function handleKeyDown(event: KeyboardEvent) {
     handleDelete()
   }
   else if (event.key === 'Backspace') {
-    event.preventDefault()
-    store.goBack()
+    const target = event.target as HTMLElement
+    if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA') {
+      event.preventDefault()
+      store.goBack()
+    }
   }
   else if (event.key === 'F2') {
     event.preventDefault()
