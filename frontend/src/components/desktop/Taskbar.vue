@@ -25,13 +25,11 @@
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
         </svg>
       </button>
-      <span class="taskbar-item time">{{ time }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
 import { useDesktopStore } from '@/store/desktop'
 import { useThemeStore } from '@/store/theme'
 
@@ -41,27 +39,11 @@ defineEmits<{
 
 const desktopStore = useDesktopStore()
 const themeStore = useThemeStore()
-const time = ref('')
-let timer: ReturnType<typeof setInterval> | null = null
 
 function getWindowName(id: string) {
-  const names: Record<string, string> = { filemanager: '文件管理器' }
+  const names: Record<string, string> = { filemanager: '文件管理器', container: '容器管理' }
   return names[id] || id
 }
-
-function updateTime() {
-  const now = new Date()
-  time.value = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
-}
-
-onMounted(() => {
-  updateTime()
-  timer = setInterval(updateTime, 10000)
-})
-
-onUnmounted(() => {
-  if (timer) clearInterval(timer)
-})
 </script>
 
 <style scoped>
@@ -71,15 +53,22 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   height: 44px;
-  background: rgba(20, 22, 34, 0.82);
-  backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   padding: 0 16px;
   font-size: 12px;
   color: #e8e8ec;
   z-index: 20;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.taskbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 22, 34, 0.45);
+  opacity: 0.6;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
 }
 
 .taskbar-left {
@@ -99,11 +88,6 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.taskbar-item {
-  font-size: 12px;
-  color: #c8d0e0;
 }
 
 .taskbar-window {
@@ -171,12 +155,5 @@ onUnmounted(() => {
 
 .theme-btn:hover {
   background: rgba(96, 165, 250, 0.15);
-}
-
-.time {
-  font-size: 12px;
-  color: #c8d0e0;
-  min-width: 48px;
-  text-align: right;
 }
 </style>

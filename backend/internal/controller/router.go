@@ -27,6 +27,40 @@ func NewRouter(cfg *config.Config, shortcutSvc *service.ShortcutService, setting
 		files.POST("/move", FileMoveHandler(cfg))
 	}
 
+	containers := r.Group("/api/containers")
+	{
+		containers.GET("/list", ContainerListHandler())
+		containers.POST("/start", ContainerStartHandler())
+		containers.POST("/stop", ContainerStopHandler())
+		containers.POST("/restart", ContainerRestartHandler())
+		containers.POST("/remove", ContainerRemoveHandler())
+		containers.GET("/logs", ContainerLogsHandler())
+		containers.GET("/inspect", ContainerInspectHandler())
+		containers.GET("/stats", ContainerStatsHandler())
+		containers.POST("/prune", ContainerPruneHandler())
+		containers.GET("/images", ContainerImagesHandler())
+		containers.POST("/pull", ContainerPullImageHandler())
+		containers.POST("/rmi", ContainerRemoveImageHandler())
+		containers.POST("/create", ContainerCreateHandler())
+		containers.POST("/exec", ContainerExecHandler())
+	}
+
+	compose := r.Group("/api/compose")
+	{
+		compose.GET("/list", ComposeListHandler())
+		compose.POST("/up", ComposeUpHandler())
+		compose.POST("/down", ComposeDownHandler())
+		compose.POST("/start", ComposeStartHandler())
+		compose.POST("/stop", ComposeStopHandler())
+		compose.POST("/restart", ComposeRestartHandler())
+		compose.POST("/create", ComposeCreateHandler())
+		compose.GET("/read", ComposeReadHandler())
+		compose.PUT("/update", ComposeUpdateHandler())
+		compose.POST("/delete", ComposeDeleteHandler())
+		compose.GET("/logs", ComposeLogsHandler())
+		compose.GET("/ps", ComposePsHandler())
+	}
+
 	shortcuts := r.Group("/api/shortcuts")
 	{
 		shortcuts.GET("", ShortcutListHandler(shortcutSvc))

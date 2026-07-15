@@ -21,6 +21,7 @@
     </div>
 
     <FileManagerWindow v-if="store.activeWindow === 'filemanager'" />
+    <ContainerWindow v-if="store.activeWindow === 'container'" />
 
     <div class="settings-panel" :class="{ show: showSettings }" id="settingsPanel">
       <h3>⚙️ 个性化</h3>
@@ -93,6 +94,7 @@ import { useDesktopStore } from '@/store/desktop'
 import { getSettings, saveSettings } from '@/api/settings'
 import Taskbar from '@/components/desktop/Taskbar.vue'
 import FileManagerWindow from '@/views/filemanager/FileManagerWindow.vue'
+import ContainerWindow from '@/views/container/ContainerWindow.vue'
 
 const store = useDesktopStore()
 
@@ -107,14 +109,13 @@ const apps = [
 
 const wallpaperOptions = [
   { id: 'none', label: '无' },
-  { id: '1', label: '星空' },
-  { id: '2', label: '雪山' },
   { id: '3', label: '极光' },
+  { id: 'cat', label: '窗边小猫' },
 ]
 
 const accentColors = ['#3b82f6', '#18a058', '#f0a020', '#e44d6a']
 
-const wallpaper = ref('none')
+const wallpaper = ref('cat')
 const blur = ref(0)
 const mask = ref(0.35)
 const accent = ref('#3b82f6')
@@ -144,7 +145,7 @@ function setAccent(c: string) {
 }
 
 function openApp(id: string) {
-  if (id === 'filemanager') {
+  if (id === 'filemanager' || id === 'container') {
     store.openWindow(id)
   }
 }
@@ -245,16 +246,12 @@ onUnmounted(() => {
   background-image: linear-gradient(135deg, #0f1123 0%, #1a1b2e 50%, #252840 100%);
 }
 
-.wp-1 {
-  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200');
-}
-
-.wp-2 {
-  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200');
-}
-
 .wp-3 {
   background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200');
+}
+
+.wp-cat {
+  background-image: url('https://oss.puboot.com/zonedesk/cat.jpg');
 }
 
 .mask {

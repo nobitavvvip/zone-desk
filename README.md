@@ -71,19 +71,15 @@ zone-panel/
 │       └── views/                  # 页面级组件
 │           ├── desktop/            # 桌面视图
 │           └── filemanager/        # 文件管理器窗口
-├── deploy/
-│   ├── config.yaml                 # 默认配置文件
-│   ├── start.sh                    # 启动脚本
-│   └── stop.sh                     # 停止脚本
 ├── scripts/
-│   ├── build.sh                    # 构建（Go + Vue）
-│   ├── package.sh                  # 打包发布 tar.gz
-│   ├── install.sh                  # 安装到目标目录
-│   ├── uninstall.sh                # 卸载
-│   ├── upgrade.sh                  # 升级
-│   └── dev.sh                      # 本地开发
+│   ├── build.sh                    # 构建（Go + Vue）+ 打包 tar.gz
+│   ├── dev.sh                      # 本地开发
+│   └── deploy/                     # 部署脚本与配置
+│       ├── start.sh                # 启动脚本
+│       ├── stop.sh                 # 停止脚本
+│       └── config.yaml             # 默认配置文件
 ├── Makefile                        # 快捷命令
-└── build/                          # 构建产物
+└── target/                         # 构建产物
     ├── zonedesk                    # Go 二进制
     ├── dist/                       # 前端构建产物
     └── zonedesk-*.tar.gz           # 发布包
@@ -92,14 +88,11 @@ zone-panel/
 ## 构建
 
 ```bash
-# 一键构建（Go + Vue）
-./scripts/build.sh
-
-# 打包发布包
-./scripts/package.sh [版本号]
+# 一键构建 + 打包（Go + Vue + tar.gz）
+./scripts/build.sh [版本号]
 ```
 
-构建产物位于 `build/` 目录。
+构建产物位于 `target/` 目录。
 
 ### 开发模式
 
@@ -114,7 +107,7 @@ zone-panel/
 
 ## 配置
 
-`deploy/config.yaml`：
+`scripts/deploy/config.yaml`：
 
 ```yaml
 server:
@@ -139,23 +132,20 @@ ui:
 ## 部署到服务器
 
 ```bash
-# 从源码安装
+# 构建并打包
 ./scripts/build.sh
-sudo ./scripts/install.sh [/srv/zonedesk]
 
-# 启动 / 停止
-/srv/zonedesk/start.sh
+# 部署：解压发布包即用
+tar xzf target/zonedesk-*.tar.gz
+cd zonedesk-*
+./start.sh
+
+# 升级：重新构建，解压覆盖
+./scripts/build.sh
+tar xzf target/zonedesk-*.tar.gz -C /srv/zonedesk --strip-components=1
 /srv/zonedesk/stop.sh
-
-# 升级
-./scripts/build.sh
-sudo ./scripts/upgrade.sh [/srv/zonedesk]
-
-# 卸载
-sudo ./scripts/uninstall.sh [/srv/zonedesk]
+/srv/zonedesk/start.sh
 ```
-
-`install.sh` 支持自定义安装路径，默认为 `/srv/zonedesk`。
 
 ## API
 

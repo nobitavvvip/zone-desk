@@ -13,11 +13,11 @@ fileManager:
 
 storage:
   dataDir: "./data"
-  logDir: "./logs"
   cacheDir: "./data/cache"
-  webDir: "./web/dist"
   shortcutsFile: "./data/shortcuts.json"
   settingsFile: "./data/settings.json"
+  logDir: "./logs"
+  webDir: "./web/dist"
 
 security:
   enableLogin: false

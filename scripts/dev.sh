@@ -6,7 +6,7 @@ ROOT_DIR=$(cd "$(dirname "$0")/.." && pwd)
 echo "==> Starting backend..."
 cd "$ROOT_DIR/backend"
 mkdir -p data/cache logs
-go run ./cmd/server --config "$ROOT_DIR/deploy/config.yaml" &
+go run ./cmd/server --config "$ROOT_DIR/scripts/deploy/config.yaml" &
 BACKEND_PID=$!
 
 echo "==> Starting frontend dev server..."

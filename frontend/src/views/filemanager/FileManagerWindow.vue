@@ -202,6 +202,7 @@ onUnmounted(() => {
   window.removeEventListener('hashchange', handleHashChange)
   document.removeEventListener('mousemove', onDrag)
   document.removeEventListener('mouseup', stopDrag)
+  window.history.replaceState(null, '', window.location.pathname)
 })
 
 watch(() => store.currentPath, (path) => {
@@ -479,12 +480,12 @@ async function handleDeleteShortcut(id: string) {
 }
 
 .control-btn {
-  width: 32px;
-  height: 24px;
+  width: 40px;
+  height: 30px;
   background: transparent;
   border: none;
   color: var(--text-primary);
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
