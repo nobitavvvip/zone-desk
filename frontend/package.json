@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.13",
-    "pinia": "^3.0.2",
-    "naive-ui": "^2.41.0",
+    "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.7.9",
-    "@vicons/ionicons5": "^0.12.0"
+    "naive-ui": "^2.41.0",
+    "pinia": "^3.0.2",
+    "vditor": "^3.11.2",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",

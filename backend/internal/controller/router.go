@@ -25,6 +25,20 @@ func NewRouter(cfg *config.Config, shortcutSvc *service.ShortcutService, setting
 		files.POST("/delete", FileDeleteHandler(cfg))
 		files.POST("/copy", FileCopyHandler(cfg))
 		files.POST("/move", FileMoveHandler(cfg))
+		files.POST("/write", FileWriteHandler(cfg))
+	}
+
+	notes := r.Group("/api/notes")
+	{
+		notes.GET("/root", NotesRootHandler(cfg))
+		notes.GET("/list", NotesListHandler(cfg))
+		notes.GET("/read", NotesReadHandler(cfg))
+		notes.POST("/write", NotesWriteHandler(cfg))
+		notes.POST("/create", NotesCreateHandler(cfg))
+		notes.POST("/mkdir", NotesMkdirHandler(cfg))
+		notes.POST("/delete", NotesDeleteHandler(cfg))
+		notes.POST("/rename", NotesRenameHandler(cfg))
+		notes.POST("/move", NotesMoveHandler(cfg))
 	}
 
 	containers := r.Group("/api/containers")

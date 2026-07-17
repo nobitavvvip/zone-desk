@@ -39,6 +39,13 @@ export const useDesktopStore = defineStore('desktop', () => {
     state.isMinimized = false
     if (!windowList.value.includes(name)) {
       windowList.value.push(name)
+      if (name === 'notes') {
+        state.x = 0
+        state.y = 0
+        state.width = window.innerWidth
+        state.height = window.innerHeight
+        state.isMaximized = true
+      }
     }
   }
 

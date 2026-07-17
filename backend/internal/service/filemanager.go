@@ -18,7 +18,7 @@ func ListFiles(path string, sortBy string, sortOrder string) (*model.FileListRes
 		return nil, err
 	}
 
-	var items []model.FileItem
+	items := make([]model.FileItem, 0, len(entries))
 	for _, entry := range entries {
 		info, err := entry.Info()
 		if err != nil {
@@ -242,4 +242,12 @@ func copyDir(source, destination string) error {
 
 func Move(source, destination string) error {
 	return os.Rename(source, destination)
+}
+
+func WriteFile(path string, content string) error {
+	dir := filepath.Dir(path)
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		return err
+	}
+	return os.WriteFile(path, []byte(content), 0644)
 }

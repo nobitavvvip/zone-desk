@@ -22,6 +22,7 @@
 
     <FileManagerWindow v-if="store.activeWindow === 'filemanager'" />
     <ContainerWindow v-if="store.activeWindow === 'container'" />
+    <NotesWindow v-if="store.activeWindow === 'notes'" />
 
     <div class="settings-panel" :class="{ show: showSettings }" id="settingsPanel">
       <h3>⚙️ 个性化</h3>
@@ -74,14 +75,10 @@
       </div>
     </div>
 
-    <div class="context-menu" :class="{ show: ctxVisible }" :style="ctxStyle" id="contextMenu">
-      <div class="ctx-item">打开</div>
-      <div class="ctx-item">新窗口打开</div>
+    <div class="context-menu" :class="{ show: ctxVisible }" :style="ctxStyle" id="contextMenu" @click.stop>
+      <div class="ctx-item" @click="handleCtxAction('refresh')">刷新</div>
       <div class="ctx-sep"></div>
-      <div class="ctx-item">重命名</div>
-      <div class="ctx-item">删除</div>
-      <div class="ctx-sep"></div>
-      <div class="ctx-item">属性</div>
+      <div class="ctx-item" @click="handleCtxAction('settings')">个性化设置</div>
     </div>
 
     <Taskbar @toggle-settings="showSettings = !showSettings" />
@@ -95,6 +92,7 @@ import { getSettings, saveSettings } from '@/api/settings'
 import Taskbar from '@/components/desktop/Taskbar.vue'
 import FileManagerWindow from '@/views/filemanager/FileManagerWindow.vue'
 import ContainerWindow from '@/views/container/ContainerWindow.vue'
+import NotesWindow from '@/views/notes/NotesWindow.vue'
 
 const store = useDesktopStore()
 
@@ -119,7 +117,6 @@ const wallpaper = ref('cat')
 const blur = ref(0)
 const mask = ref(0.35)
 const accent = ref('#3b82f6')
-const loaded = ref(false)
 const showSettings = ref(false)
 const ctxVisible = ref(false)
 const ctxX = ref(0)
@@ -145,7 +142,7 @@ function setAccent(c: string) {
 }
 
 function openApp(id: string) {
-  if (id === 'filemanager' || id === 'container') {
+  if (id === 'filemanager' || id === 'container' || id === 'notes') {
     store.openWindow(id)
   }
 }
@@ -155,6 +152,18 @@ function showContextMenu(e: MouseEvent) {
   ctxY.value = e.clientY
   ctxVisible.value = true
   showSettings.value = false
+}
+
+function handleCtxAction(action: string) {
+  ctxVisible.value = false
+  switch (action) {
+    case 'refresh':
+      window.location.reload()
+      break
+    case 'settings':
+      showSettings.value = true
+      break
+  }
 }
 
 function updateClock() {
@@ -168,12 +177,12 @@ function handleClick(e: MouseEvent) {
   if (!target.closest('.settings-panel') && !target.closest('.gear')) {
     showSettings.value = false
   }
-  if (!target.closest('.context-menu') && !target.closest('.desktop')) {
-    ctxVisible.value = false
-  }
+  ctxVisible.value = false
 }
 
 let saveTimer: ReturnType<typeof setTimeout> | null = null
+let skipWatch = true
+
 function queueSave() {
   if (saveTimer) clearTimeout(saveTimer)
   saveTimer = setTimeout(() => {
@@ -187,7 +196,7 @@ function queueSave() {
 }
 
 watch([wallpaper, blur, mask, accent], () => {
-  if (!loaded.value) return
+  if (skipWatch) return
   queueSave()
 })
 
@@ -206,7 +215,7 @@ onMounted(async () => {
     // use defaults
   }
 
-  loaded.value = true
+  skipWatch = false
 
   const hash = window.location.hash
   if (hash.startsWith('#/filemanager')) {

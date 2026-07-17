@@ -30,6 +30,7 @@ type Config struct {
 		WebDir        string `yaml:"webDir"`
 		ShortcutsFile string `yaml:"shortcutsFile"`
 		SettingsFile  string `yaml:"settingsFile"`
+		NotesDir      string `yaml:"notesDir"`
 	} `yaml:"storage"`
 
 	Security struct {

@@ -270,3 +270,35 @@ func FileDeleteHandler(cfg *config.Config) gin.HandlerFunc {
 		util.OK(c, gin.H{"path": path})
 	}
 }
+
+func FileWriteHandler(cfg *config.Config) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var req struct {
+			Path    string `json:"path"`
+			Content string `json:"content"`
+		}
+		if err := c.ShouldBindJSON(&req); err != nil {
+			util.Fail(c, 400, "invalid request")
+			return
+		}
+
+		path, err := util.CleanAbsPath(req.Path)
+		if err != nil {
+			util.Fail(c, 400, err.Error())
+			return
+		}
+
+		if err := service.WriteFile(path, req.Content); err != nil {
+			util.Fail(c, 500, err.Error())
+			return
+		}
+
+		item, err := service.StatFile(path)
+		if err != nil {
+			util.OK(c, gin.H{"path": path})
+			return
+		}
+
+		util.OK(c, item)
+	}
+}
