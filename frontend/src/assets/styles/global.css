@@ -84,6 +84,94 @@ html, body, #app {
   --hover-bg-subtle: rgba(96, 165, 250, 0.08);
 }
 
+/* ===== 标题自动编号 (JS 生成 .vditor-heading-number) ===== */
+.vditor-heading-number {
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-right: 4px;
+  user-select: none;
+}
+
+/* ===== Mermaid 图表主题适配 ===== */
+[data-theme="light"] .vditor-ir .mermaid {
+  --mermaid-background: var(--bg-primary);
+  --mermaid-main: var(--text-primary);
+  --mermaid-secondary: var(--text-secondary);
+  --mermaid-tertiary: var(--text-muted);
+  --mermaid-line: var(--border-color);
+}
+
+[data-theme="dark"] .vditor-ir .mermaid {
+  --mermaid-background: var(--bg-primary);
+  --mermaid-main: var(--text-primary);
+  --mermaid-secondary: var(--text-secondary);
+  --mermaid-tertiary: var(--text-muted);
+  --mermaid-line: var(--border-color);
+}
+
+.vditor-ir .mermaid {
+  overflow: auto;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ===== 代码块增强样式 (IR 模式) ===== */
+.vditor-ir pre[class*="language-"] {
+  position: relative;
+  border-radius: 6px;
+  overflow: auto;
+  margin-bottom: 16px;
+}
+
+/* 语言标签 */
+.vditor-code-lang {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 10;
+  line-height: 1;
+}
+
+/* 复制按钮 */
+.vditor-code-copy {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 11px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+  z-index: 10;
+  line-height: 1;
+}
+.vditor-ir pre[class*="language-"]:hover .vditor-code-copy,
+.vditor-ir .vditor-ir__node--expand[data-type="code-block"]:hover .vditor-code-copy {
+  opacity: 1;
+}
+.vditor-code-copy:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Vditor 预览模式下的复制按钮样式适配 */
+.vditor-preview pre:hover .vditor-copy {
+  display: block;
+}
+.vditor-preview .vditor-copy svg {
+  color: var(--text-muted);
+}
+
 
 
 

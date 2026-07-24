@@ -97,10 +97,10 @@ import NotesWindow from '@/views/notes/NotesWindow.vue'
 const store = useDesktopStore()
 
 const apps = [
-  { id: 'filemanager', name: '文件管理器', emoji: '📁' },
+  { id: 'filemanager', name: '文件管理', emoji: '📁' },
   { id: 'container', name: '容器管理', emoji: '🐳' },
   { id: 'status', name: '系统状态', emoji: '📊' },
-  { id: 'notes', name: '日报笔记', emoji: '📝' },
+  { id: 'notes', name: '简约笔记', emoji: '📝' },
   { id: 'settings', name: '系统设置', emoji: '⚙️' },
   { id: 'terminal', name: '远程终端', emoji: '🖥️' },
 ]
